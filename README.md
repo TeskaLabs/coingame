@@ -99,3 +99,19 @@ A `ValidTo` timestamp limits each transaction durability.
 If the transaction is not added to a blockchain till `ValidTo` time, it is discarded and must not be used any longer.
 A `ValidTo` attribute exists only for transactions that are yet in the pool this attribute must be removed when the transaction is added to a block.
 
+## The hash
+
+The hash connects two blocks together.
+It must be placed after each block to proof a work that was invested into a finding a valid block (aka mining).
+The hash contains a single attribute `Digest` which is a hexadecimal result of the hash function.
+
+The hash is computed using SHA-384 hashing function **TWICE** on a previous hash and a current block in their respective textual YAML representataions.
+
+Example of the hash computation in the Python:
+
+        m = hashlib.sha384()
+        m.update(PreviousHash)
+        m.update(Block)
+        m.update(PreviousHash)
+        m.update(Block)
+        Digest = m.hexdigest()
