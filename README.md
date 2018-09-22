@@ -128,3 +128,7 @@ The difficulty may change during the game.
 
 The difficulty value specifies the number of zeroes in a binary representation of the hash, e.g., a difficulty 20 means that hash has to start with 20x `0` in a binary representation.
 Valid blocks must have a hash that conforms a declared difficulty.
+
+A reasonable value of the difficulty for a game is between 20 and 28.
+
+
