@@ -101,11 +101,13 @@ A `ValidTo` attribute exists only for transactions that are yet in the pool this
 
 ## The hash
 
-The hash connects two blocks together.
+The hash connects two blocks.
 It must be placed after each block to proof a work that was invested into a finding a valid block (aka mining).
 The hash contains a single attribute `Digest` which is a hexadecimal result of the hash function.
 
-The hash is computed using SHA-384 hashing function **TWICE** on a previous hash and a current block in their respective textual YAML representataions.
+![Hashing diagram](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/hashing.jpg)
+
+The hash is computed using SHA-384 hashing function **TWICE** on a previous hash and a current block in their respective textual YAML representation.
 
 Example of the hash computation in the Python:
 
@@ -115,3 +117,4 @@ Example of the hash computation in the Python:
         m.update(PreviousHash)
         m.update(Block)
         Digest = m.hexdigest()
+
