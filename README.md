@@ -89,7 +89,7 @@ The maximum number of transactions in the block is 1000.
 The first transaction must a mining reward transaction, which contains only a miner reward in the `Fee` attribute.
 The CoinServer provides a maximum miner fee value.
 
-Transaction attributes:
+### Transaction attributes
 
  * `Id` is a long integer that identifies the transaction uniquely in the transaction pool.
  * `Fee` a float that specifies a fee for a miner for including this transaction in the block.
