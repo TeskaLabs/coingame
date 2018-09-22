@@ -111,12 +111,13 @@ The hash is computed using SHA-384 hashing function **TWICE** on a previous hash
 
 Example of the hash computation in the Python:
 
-        m = hashlib.sha384()
-        m.update(PreviousHash)
-        m.update(Block)
-        m.update(PreviousHash)
-        m.update(Block)
-        Digest = m.hexdigest()
+    import hashlib
+    m = hashlib.sha384()
+    m.update(PreviousHash)
+    m.update(Block)
+    m.update(PreviousHash)
+    m.update(Block)
+    Digest = m.hexdigest()
 
 
 ## The difficulty
