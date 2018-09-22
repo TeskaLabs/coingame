@@ -79,7 +79,6 @@ The block consists of block attributes and a list of transactions.
  * `Nonce` is the random integer number selected by a miner.
  * `Miner` is a string that cointains a name of the player who mined this block.  
     The format is defined by regex `^[0-9a-zA-Z]{3,32}$`.
- * `Miner` is a string that cointains a name of the player who mined this block.  
 
 ### Transactions
 
