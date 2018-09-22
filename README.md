@@ -55,6 +55,11 @@ Later in the game, players run their mining code, and they can decide if they wa
  * CoinGame Server
  * RabbitMQ 
 
-## Documentation
+## Blockchain
 
-...
+The blockchain is a YAML file, that consist of the series of two documents: a block and a hash.
+
+![Blockchain diagram](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/blockchain.jpg)
+
+The blockchain starts with a first block, that is pre-mined by a TeskaLabs.
+Players add their blocks after the last block in the blockchain.
