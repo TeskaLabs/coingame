@@ -29,6 +29,9 @@ You find this server in the GitHub repository.
 This server provides an HTTP REST interface and also publishes various messages over RabbitMQ / AMQP. 
 A player can decide what interface (HTTP REST, RabbitMQ or both) she or he needs for mining.
 The server manages a blockchain and a pool of transactions.
+Once the transaction is added to a blockchain as part of the valid block, the CoinGame server removes this transaction from a pool, so it is not available for other players.
+It means that each transaction can be present in the blockchain only once.
+A server rejects any subsequent block - even if it otherwise is valid - because the given transaction has been already included in the blockchain.
 
 ## The game
 
@@ -43,13 +46,15 @@ The CoinGame server adds a reward to a player score.
 
 Later in the game, players run their mining code, and they can decide if they want to optimize, refactor or change their code to improve their changes.
 
-
 ## Prerequisites
 
- * Internet connectivity or at least a LAN with an IP protocol (e.g., on the off-site)
- * Laptops or PCs for each player, they should be comparable concerning computing performance.
- * Python (or other) runtime environment at each player laptop
- * Text editor or IDE at each player laptop
- * Coin Game Server
+ * Internet connectivity or a LAN with an IP protocol (e.g., on the retreat site)
+ * Laptop or PC for each player (comparable concerning computing performance)
+ * Python (or other) runtime environment at each player laptop or PC
+ * Text editor or IDE at each player laptop or PC
+ * CoinGame Server
  * RabbitMQ 
 
+## Documentation
+
+...
