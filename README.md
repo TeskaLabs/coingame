@@ -58,8 +58,31 @@ Later in the game, players run their mining code, and they can decide if they wa
 ## Blockchain
 
 The blockchain is a YAML file, that consist of the series of two documents: a block and a hash.
+The actual blockchain can be downloaded from the REST API of the CoinServer.
 
 ![Blockchain diagram](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/blockchain.jpg)
 
 The blockchain starts with a first block, that is pre-mined by a TeskaLabs.
 Players add their blocks after the last block in the blockchain.
+
+## The block
+
+The block consists of block attributes and a list of transactions.
+
+### Block attributes
+
+ * `Timestamp` contains a UTC date and time of a block creation in format defined by ISO 8601  
+    (aka `YYYY-MM-DDThh:mm:ss.uuuuuuZ`).
+ * `Difficulty` is an positive integer number.
+    It is in the range between 1 and 384.
+    The difficulty for a new block is provided by a CoinGame server.
+ * `Nonce` is the random integer number selected by a miner.
+ * `Miner` is a string that cointains a name of the player who mined this block.  
+    The format is defined by regex `^[0-9a-zA-Z]{3,32}$`.
+ * `Miner` is a string that cointains a name of the player who mined this block.  
+
+### Transactions
+
+The first transaction must a mining reward transaction, which contains only a miner reward in the `Fee` attribute.
+The CoinServer provides a maximum miner fee value.
+
