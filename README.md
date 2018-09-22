@@ -80,7 +80,7 @@ The block consists of block attributes and a list of transactions.
  * `Miner` is a string that cointains a name of the player who mined this block.  
     The format is defined by regex `^[0-9a-zA-Z]{3,32}$`.
 
-### Transactions
+## Transactions
 
 Each block contains a list of transactions.
 The list must contain at least 5 transactions (the exception is the first block with one transaction only).
