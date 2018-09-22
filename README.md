@@ -28,17 +28,14 @@ The game is provided by a CoinGame server (named `coingamesvr.py`).
 You find this server in the GitHub repository.
 This server provides an HTTP REST interface and also publishes various messages over RabbitMQ / AMQP. 
 A player can decide what interface (HTTP REST, RabbitMQ or both) she or he needs for mining.
-
 The server manages a blockchain and a pool of transactions.
-The player fetches some transactions from this pool and tries to build a valid block.
-The player then (via the code) uploads a block to a CoinGame server, the server evaluates if the block is genuinely valid and if yes, then the block is added to a blockchain, and the player receives a reward.
 
-## The game start
+## The game
 
 The game starts with a first block pre-mined by a game provider.
 All players have zero coins (aka Score) at the beginning.
 Each player starts to implement his mining code from scratch.
-The mining code is basically about constructing a valid block of transactions with a proper hash.
+The mining code is about constructing a valid block of transactions with a proper hash.
 At one point in time, each player starts to execute their code and hence starts to mine blocks.
 Players use CoinGame REST API and/or messages publishes via RabbitMQ to build a valid block and to submit that block to a CoinGame server.
 Whenever a server accepts a valid block, a relevant player receives a reward based on the mining reward and fees from each transaction.
