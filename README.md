@@ -83,6 +83,20 @@ The block consists of block attributes and a list of transactions.
 
 ### Transactions
 
+Each block contains a list of transactions.
+The list must contain at least 5 transactions (the exception is the first block with one transaction only).
+The maximum number of transactions in the block is 1000.
+
 The first transaction must a mining reward transaction, which contains only a miner reward in the `Fee` attribute.
 The CoinServer provides a maximum miner fee value.
+
+Transaction attributes:
+
+ * `Id` is a long integer that identifies the transaction uniquely in the transaction pool.
+ * `Fee` a float that specifies a fee for a miner for including this transaction in the block.
+ * `Data` is a binary field in a Base64 encoding that contains additional details about the transaction.
+
+A `ValidTo` timestamp limits each transaction durability.
+If the transaction is not added to a blockchain till `ValidTo` time, it is discarded and must not be used any longer.
+A `ValidTo` attribute exists only for transactions that are yet in the pool this attribute must be removed when the transaction is added to a block.
 
