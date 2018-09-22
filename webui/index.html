@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang=en>
+<head>
+	<meta charset=utf-8>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>CoinGame Homepage</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+	<div class="container-fluid">
+		<div class="py-5 text-center">
+			<h2>CoinGame</h2>
+			<p class="lead">
+				A fun game that illustrates the usage of asynchronous Python via the blockchain mining.<br/>
+				More at <a href="https://github.com/TeskaLabs/coingame">github.com/TeskaLabs/coingame</a>
+			</p>
+		</div>
+
+		<div class="row">
+			<div class="col-sm">
+				<div class="card">
+					<h5 class="card-header">Score</h5>
+					<div class="card-body" id="score-card">
+						<p class="card-text">...</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="card">
+					<h5 class="card-header">Blockchain</h5>
+					<div class="card-body">
+						<h5 class="card-title" id="blockchain-card-overview">...</h5>
+						<p class="card-text" id="blockchain-card-chain">...</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="card">
+					<h5 class="card-header">Transactions</h5>
+					<div class="card-body" id="tpool-card">
+						<p class="card-text">...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="my-5 pt-5 text-muted text-center text-small">
+			<p class="mb-1">© 2018 <a href="https://teskalabs.com/">TeskaLabs Ltd</a></p>
+		</footer>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+
+var BLOCKCHAIN="coingame";
+
+String.prototype.cut = function(i0, i1) {
+	return this.substring(0, i0)+'..'+this.substring(i1);
+}
+
+$(document).ready(function() {
+	setTimeout(periodicTimer, 1);
+});
+
+
+function periodicTimer() {
+	$.ajax({
+		// Actuals score
+		url: '/api/'+BLOCKCHAIN+'/actuals',
+		success: function(data) {
+			var score = new Array();
+			for (var key in data) {
+				score.push({'Miner': key, 'Coins': data[key]});
+			}
+
+			score.sort(function(a, b){return a['coins']-b['coins']});
+			$('#score-card').empty();
+
+			for (var i in score) {
+				var x = $('#score-card').append("<p class=\"card-text\">"
+					+(parseInt(i,10)+1)+'. '
+					+'<b class="miner-name" /></b>'
+					+' with '
+					+'<b>'+score[i]['Coins'].toFixed(2)+'</b>'
+					+' coin(s)'
+					+"</p>"
+				);
+				x.find('.miner-name').text(score[i]['Miner']);
+			}
+		}
+	});
+
+	$.ajax({
+		// Blockchain state
+		url: '/api/'+BLOCKCHAIN+'/state',
+		success: function(data) {
+			var trg = $('#blockchain-card-overview');
+			trg.empty();
+			
+			trg.append(
+				  '<span>Difficulty: '+data['Difficulty']+'</span> | '
+				+ '<span>Fee: '+data['Fee'].toFixed(2)+'</span>'
+			);
+		}
+	});
+
+	$.ajax({
+		// Blockchain state
+		url: '/api/'+BLOCKCHAIN,
+		headers: {          
+			Accept: "text/json",
+		},
+		success: function(blockchain) {
+			var trg = $('#blockchain-card-chain');
+			trg.empty();
+			for (var i in blockchain) {
+				var ts = new Date(blockchain[i]['Timestamp'])
+				var x = trg.prepend('<div class="alert alert-primary" role="alert">'
+					+ 'Miner: <b class="miner-name" /></b>'
+					+ '<br />'
+					+ 'Mined at: '
+					+ ts
+					+ '<br />'
+					+ 'Difficulty: ' + blockchain[i]['Difficulty']
+					+ '<br />'
+					+ 'Transactions: ' + blockchain[i]['TransactionCount']
+					+ '</div>'
+				);
+				x.find('.miner-name').text(blockchain[i]['Miner']);
+			}
+		}
+	});
+
+	$.ajax({
+		// Blockchain state
+		url: '/api/'+BLOCKCHAIN+'/txpool',
+		headers: {          
+			Accept: "text/json",
+		},
+		success: function(txpool) {
+			var trg = $('#tpool-card');
+			trg.empty();
+
+			for (var i in txpool) {
+				trg.append('<span class="badge badge-pill badge-primary text-monospace">'
+					+ txpool[i]['Id'].cut(5,txpool[i]['Id'].length-5)
+					+ ' @ '
+					+ txpool[i]['Fee'].toFixed(2)
+					+ '</span>&nbsp;'
+				);
+			}
+		}
+	});
+
+	setTimeout(periodicTimer, 1000);
+}
+
+	</script>
+</body>
