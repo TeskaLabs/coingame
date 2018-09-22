@@ -57,7 +57,7 @@ Later in the game, players run their mining code, and they can decide if they wa
 
 ## Blockchain
 
-The blockchain is a YAML file, that consist of the series of two documents: a block and a hash.
+The blockchain is a [YAML](http://yaml.org/spec/1.2/spec.html) file, that consist of the series of two documents: a block and a hash.
 The actual blockchain can be downloaded from the REST API of the CoinServer.
 
 ![Blockchain diagram](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/blockchain.jpg)
@@ -118,3 +118,13 @@ Example of the hash computation in the Python:
         m.update(Block)
         Digest = m.hexdigest()
 
+
+## The difficulty
+
+The difficulty is a measure of how difficult it is to find a hash for a block below a given value.
+The CoinGame server provides a current difficulty value via its REST API.
+The CoinGame server rejects blocks that declares a difficulty lower than currently declared.
+The difficulty may change during the game.
+
+The difficulty value specifies the number of zeroes in a binary representation of the hash, e.g., a difficulty 20 means that hash has to start with 20x `0` in a binary representation.
+Valid blocks must have a hash that conforms a declared difficulty.
