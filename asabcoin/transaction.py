@@ -14,16 +14,20 @@ class Transaction(yaml.YAMLObject):
 
 
 	def __eq__(self, other_tx):
-		return self.Id == other_tx.Id
+		return (self.Id == other_tx.Id) and (self.Fee == other_tx.Fee) and (self.Data == other_tx.Data)
 
 
 	def __hash__(self):
-		return hash(self.Id)
+		return hash((self.Id, self.Fee, self.Data))
 
 
 	def __repr__(self):
 		attrs=["{}={}".format(attr, getattr(self, attr)) for attr in ['Id', 'Fee', 'Data', 'ValidTo'] if hasattr(self, attr)]
 		return "{}({})".format(self.__class__.__name__, ", ".join(attrs))
+
+
+	def yaml_dump(self):
+		return yaml.dump(self)
 
 
 	def prepare(self):

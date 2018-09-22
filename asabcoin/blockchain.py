@@ -35,6 +35,21 @@ class Blockchain(object):
 
 		self.TransactionPool = TransactionPool(app)
 
+		if not os.path.isfile(self.Filename):
+			self.initialize("""--- !Hash
+Digest: '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+--- !Block
+Timestamp: 2018-09-16T23:32:56.095486Z
+Difficulty: 32
+Nonce: 77726441
+Miner: TeskaLabs
+Transactions:
+  - !Transaction
+    Fee: 1.0
+--- !Hash
+Digest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b9493ba7fe4433e2439f5672a7'
+""")
+
 		# Validate a blockchain
 		for block in self:
 			pass

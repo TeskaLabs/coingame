@@ -1,10 +1,10 @@
+import os
 import aiohttp.web
 
 import asab
 import asab.web.rest
 
 from .blockchain import Blockchain
-from .miner import miner
 
 class AsabCoinApplication(asab.Application):
 
@@ -28,52 +28,30 @@ class AsabCoinApplication(asab.Application):
 
 		# Be rest!
 		websvc.WebApp.middlewares.append(asab.web.rest.JsonExceptionMiddleware)
-		websvc.WebApp.router.add_get(r'/', self.homepage)
 
-		websvc.WebApp.router.add_get(r'/{blockchain}', self.download)
-		websvc.WebApp.router.add_put(r'/{blockchain}', self.upload)
-		websvc.WebApp.router.add_get(r'/{blockchain}/actuals', self.actuals)
-		websvc.WebApp.router.add_put(r'/{blockchain}/init', self.init)
-		websvc.WebApp.router.add_get(r'/{blockchain}/state', self.state)
+		websvc.WebApp.router.add_get(r'/api/{blockchain}', self.download)
+		websvc.WebApp.router.add_put(r'/api/{blockchain}', self.upload)
+		websvc.WebApp.router.add_get(r'/api/{blockchain}/actuals', self.actuals)
+		websvc.WebApp.router.add_get(r'/api/{blockchain}/state', self.state)
+		websvc.WebApp.router.add_get(r'/api/{blockchain}/txpool', self.txpool)
+
+		websvc.add_frontend_web_app('/', os.environ.get('WEBAPPDIR', './webui'))
 
 		# Prepare a message broker
 		from asab.mom.amqp import AMQPBroker
 		self.Broker = AMQPBroker(self, config={
 			'url': 'amqp://guest:guest@localhost/',
-			'exchange': 'asabcoin.exchange',
+			'exchange': 'amq.topic',
 		})
 
 		# Initialize the blockchain(s)
 		self.Blockchains = {
-			'heurekacoin': Blockchain(self, './blockchain.yaml', difficulty=16)
+			'coingame': Blockchain(self, './gamecoin.yaml', difficulty=16)
 		}
 
 
-
-	async def homepage(self, request):
-		return asab.web.rest.json_response(request, data={
-			'title': 'AsabCoin',
-			'vendor': 'TeskaLabs Ltd',
-		}, pretty=True)
-
-
-	async def init(self, request):
-		req = await request.json()
-		difficulty = int(req.get('difficulty', 16))
-
-		blockchain = self.Blockchains.get(request.match_info['blockchain'])
-		if blockchain is None:
-			raise aiohttp.web.HTTPNotFound()
-
-		proactor = self.get_service("asab.ProactorService")
-		#TODO: Allow to specify a miner
-		def mine_first_block():
-			return miner(difficulty=difficulty)
-		first_block = await proactor.run(mine_first_block)
-
-		blockchain.initialize(first_block)
-
-		return asab.web.rest.json_response(request, data={'result': 'OK'})
+	async def main(self):
+		print("Ready.")
 
 
 	async def actuals(self, request):
@@ -95,6 +73,19 @@ class AsabCoinApplication(asab.Application):
 		blockchain = self.Blockchains.get(request.match_info['blockchain'])
 		if blockchain is None:
 			raise aiohttp.web.HTTPNotFound()
+
+		if request.headers.get("Accept") == 'text/json':
+			# We suppose to return JSON variant of the blockchain
+			bc = []
+			for block in blockchain:
+				bc.append({
+					'Timestamp': block.Timestamp.isoformat(),
+					'Difficulty': block.Difficulty,
+					'Nonce': block.Nonce,
+					'Miner': block.Miner,
+					'TransactionCount': len(block.Transactions),
+				})
+			return asab.web.rest.json_response(request, data=bc)
 
 		resp = aiohttp.web.StreamResponse(
 			status=200, 
@@ -136,3 +127,35 @@ class AsabCoinApplication(asab.Application):
 		blockchain.append(await request.read())
 
 		return asab.web.rest.json_response(request, data={'result': 'OK'})
+
+
+	async def txpool(self, request):
+		blockchain = self.Blockchains.get(request.match_info['blockchain'])
+		if blockchain is None:
+			raise aiohttp.web.HTTPNotFound()
+
+		if request.headers.get("Accept") == 'text/json':
+			# We suppose to return JSON variant of the blockchain
+			txs = []
+			for tx in blockchain.TransactionPool.Transactions.values():
+				txs.append({
+					'Id': str(tx.Id),
+					'Fee': tx.Fee,
+				})
+			return asab.web.rest.json_response(request, data=txs)
+
+
+		resp = aiohttp.web.StreamResponse(
+			status=200, 
+			reason='OK', 
+			headers={'Content-Type': 'text/yaml'},
+		)
+
+		await resp.prepare(request)
+
+		for tx in blockchain.TransactionPool.Transactions.values():
+			await resp.write(b'--- ')
+			await resp.write(tx.yaml_dump().encode('utf-8'))
+		await resp.drain()
+
+		return resp

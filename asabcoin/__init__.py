@@ -1,5 +1,4 @@
 from .difficulty import calculate_difficulty
-from .miner import miner
 
 from .block import Block
 from .hash import Hash

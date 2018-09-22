@@ -1,6 +1,8 @@
 import uuid
 import datetime
 import asyncio
+import random
+import string
 
 import yaml
 
@@ -20,8 +22,6 @@ class TransactionPool(object):
 
 
 	def on_tick(self, event_name):
-		print("Tick!")
-		
 		# Search the pool and remove obsolete transactions
 		now = datetime.datetime.utcnow()
 		expired_txs = []
@@ -71,9 +71,15 @@ class TransactionPool(object):
 		'''
 		Generate a random transaction
 		'''
+		tx_data = yaml.dump({
+			'From': ''.join(random.choices(string.ascii_uppercase + string.digits, k=12)),
+			'To': ''.join(random.choices(string.ascii_uppercase + string.digits, k=12)),
+			'Amount': float(random.randint(30, 200))/10.0,
+		})
+
 		return Transaction(
 			uuid.uuid1().int,
 			fee=0.1,
 			validto=datetime.datetime.utcnow() + datetime.timedelta(minutes=1),
-			data= b'EhEhEhEh'
+			data= tx_data.encode('utf-8')
 		)
