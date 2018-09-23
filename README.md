@@ -25,16 +25,18 @@ The game lasts approximately 3 hours.
 The time of the end of the game is defined at the beginning of the game, and it is known to players.
 The game can be prolonged during the game if all players agree.
 
+
 ## CoinGame server
 
 The game is provided by a CoinGame server (named `coingamesvr.py`).
 You find this server in the GitHub repository.
-This server provides an HTTP REST interface and also publishes various messages over RabbitMQ / AMQP. 
+This server provides a simple user web interface, an HTTP REST interface and also publishes various messages over RabbitMQ / AMQP. 
 A player can decide what interface (HTTP REST, RabbitMQ or both) she or he needs for mining.
 The server manages a blockchain and a pool of transactions.
 Once the transaction is added to a blockchain as part of the valid block, the CoinGame server removes this transaction from a pool, so it is not available for other players.
 It means that each transaction can be present in the blockchain only once.
 A server rejects any subsequent block - even if it otherwise is valid - because the given transaction has been already included in the blockchain.
+
 
 ## The game
 
@@ -49,6 +51,7 @@ The CoinGame server adds a reward to a player score.
 
 Later in the game, players run their mining code, and they can decide if they want to optimize, refactor or change their code to improve their changes.
 
+
 ## Prerequisites
 
  * Internet connectivity or a LAN with an IP protocol (e.g., on the retreat site)
@@ -61,6 +64,7 @@ Later in the game, players run their mining code, and they can decide if they wa
 Alternatively, you can use Docker to build and run CoinGame Server including all dependencies easily.
 Please refer to a relevant chapter below.
 
+
 ## Blockchain
 
 The blockchain is a [YAML](http://yaml.org/spec/1.2/spec.html) file, that consist of the series of two documents: a block and a hash.
@@ -70,6 +74,7 @@ The actual blockchain can be downloaded from the REST API of the CoinServer.
 
 The blockchain starts with a first block, that is pre-mined by a TeskaLabs.
 Players add their blocks after the last block in the blockchain.
+
 
 ## The block
 
@@ -85,6 +90,7 @@ The block consists of block attributes and a list of transactions.
  * `Nonce` is the random integer number selected by a miner.
  * `Miner` is a string that cointains a name of the player who mined this block.  
     The format is defined by regex `^[0-9a-zA-Z]{3,32}$`.
+
 
 ## Transactions
 
@@ -104,6 +110,7 @@ The CoinServer provides a maximum miner fee value.
 A `ValidTo` timestamp limits each transaction durability.
 If the transaction is not added to a blockchain till `ValidTo` time, it is discarded and must not be used any longer.
 A `ValidTo` attribute exists only for transactions that are yet in the pool this attribute must be removed when the transaction is added to a block.
+
 
 ## The hash
 
@@ -146,6 +153,10 @@ A reasonable value of the difficulty for a game is between 20 and 28.
 ### CoinGame server REST API
 
 [Interactive API documentation](https://documenter.getpostman.com/view/2573275/RWaPsm5D)
+
+### CoinGame server AMQP
+
+![A scheme of the AMQP messaging](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/amqp.jpg)
 
 
 ## Docker support
