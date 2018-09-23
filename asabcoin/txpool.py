@@ -30,7 +30,7 @@ class TransactionPool(object):
 				expired_txs.append(txid)
 
 		for txid in expired_txs:
-			del self.Transactions[txid]
+			self.pop(txid)
 
 		if len(self.Transactions) < 100:
 			for _ in range(5):
@@ -43,7 +43,19 @@ class TransactionPool(object):
 
 
 	def pop(self, transaction_id):
-		return self.Transactions.pop(transaction_id)		
+		transaction = self.Transactions.pop(transaction_id)
+
+		msg = yaml.dump(transaction, explicit_start=True)
+		asyncio.ensure_future(
+			self.Broker.publish(
+				msg,
+				target="transaction.removed",
+				content_type="text/yaml",
+			),
+			loop = self.Loop,
+		)
+
+		return transaction
 
 
 	def add(self, transaction):
@@ -60,7 +72,7 @@ class TransactionPool(object):
 		asyncio.ensure_future(
 			self.Broker.publish(
 				msg,
-				target="transaction",
+				target="transaction.added",
 				content_type="text/yaml",
 			),
 			loop = self.Loop,
