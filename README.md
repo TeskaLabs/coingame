@@ -5,6 +5,9 @@ It is a teaching tool for demonstrating principles of distributes computing, mic
 The CoinGame is loosely based on the BitCoin and blockchain technology.
 The CoinGame is designed for a Python, but players may use other programming languages as well.
 
+![Screenshot from a CoinGame](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/screenshot.png)
+
+
 ## Rules
 
 The goal of this game is to mine more coins than the other players.
@@ -136,6 +139,13 @@ Valid blocks must have a hash that conforms a declared difficulty.
 ![Hashing difficulty diagram](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/difficulty.jpg)
 
 A reasonable value of the difficulty for a game is between 20 and 28.
+
+
+## Reference documentation
+
+### CoinGame server REST API
+
+[Interactive API documentation](https://documenter.getpostman.com/view/2573275/RWaPsm5D)
 
 
 ## Docker support
