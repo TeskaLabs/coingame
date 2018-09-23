@@ -162,7 +162,7 @@ The CoinGame uses `/` (default) RabbitMQ virtual host.
 
 ![A scheme of the AMQP messaging](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/amqp.jpg)
 
-### Subscription process
+#### Subscription process
 
 A player should declare an exclusive temporary queue, named with prefix `~T` (aka `~Tmyqueue`).
 This queue has to be bound to a `amq.topic`.
@@ -185,7 +185,7 @@ A player can select what types of messages he wants to consume or subscribe to a
     `channel.basic_consume(queue='~Tmyqueue', ...)`
 
 
-### Message type `transaction.added`
+#### Message type `transaction.added`
 
 The transaction has been added to a pool.
 
@@ -197,7 +197,7 @@ The transaction has been added to a pool.
     ValidTo: 2018-09-23 10:37:53.112603
 
 
-### Message type `transaction.removed`
+#### Message type `transaction.removed`
 
 The transaction has been removed from a pool.
 It is no longer valid and blocks with this transaction will not be accepted by a server.
@@ -208,6 +208,29 @@ It is no longer valid and blocks with this transaction will not be accepted by a
     Fee: 0.1
     Id: 199364695671660490824138862191540206604
     ValidTo: 2018-09-23 10:37:53.112603
+
+
+#### Message type `block.added`
+
+The new block has been added to a blockchain.
+
+    --- !Block
+    Difficulty: 16
+    Miner: Taxido
+    Nonce: 24393844
+    Timestamp: 2018-09-23 10:46:04.653806
+    Transactions:
+    - !Transaction {Fee: 1.0}
+    - !Transaction
+      Data: !!binary |
+        e0Ftb3VudDogMTUuMywgRnJvbTogSVdNNVZJMzRISThSLCBUbzogRjVCWTFRMlpGVkdYfQo=
+      Fee: 0.1
+      Id: 290422523990426140188794327910770834444
+    - !Transaction
+      Data: !!binary |
+        e0Ftb3VudDogMTkuOCwgRnJvbTogQjNDNlYzTFM3S1NHLCBUbzogMFhUVE5LUjVaOFFKfQo=
+      Fee: 0.1
+      Id: 290423332117683785685037782059064261644
 
 
 ## Docker support
