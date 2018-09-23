@@ -156,7 +156,29 @@ A reasonable value of the difficulty for a game is between 20 and 28.
 
 ### CoinGame server AMQP
 
+The CoinGame server publishes messages to a RabbitMQ server, to a `amq.topic` exchange.
+The player can subscribe to RabbitMQ to receive these messages using AMQP protocol.
+The CoinGame uses `/` (default) RabbitMQ virtual host.
+
 ![A scheme of the AMQP messaging](https://raw.githubusercontent.com/TeskaLabs/coingame/master/docs/amqp.jpg)
+
+### Subscription process
+
+A player should declare an exclusive temporary queue, named with prefix `~T` (aka `~Tmyqueue`).
+This queue has to be bound to a `amq.topic`.
+A player can select what types of messages he wants to consume or subscribe to all types.
+
+ 1. Declare an exclusive queue
+
+    `channel.queue_declare(queue='~Tmyqueue', exclusive=True, auto_delete=True)`
+
+ 2. Bind th queue to an exchange
+
+    `channel.queue_bind(queue='~Tmyqueue', exchange='amq.topic', routing_key='#')`
+
+ 3. Consume messages
+
+    `channel.basic_consume(queue='~Tmyqueue', ...)`
 
 
 ## Docker support
@@ -167,10 +189,10 @@ You can quickly start CoinGame server in the Docker.
 
  2. Build an image from a git repository:
 
-    docker build . -t coingame
+    `docker build . -t coingame`
 
  3. Start a Docker container
 
-    docker run coingame
+   `docker run coingame`
 
 The containers offers a HTTP service (API and a simple UI) on a port TCP/80 and RabbitMQ/AMQP server on a port TCP/5672.
