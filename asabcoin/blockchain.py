@@ -116,6 +116,9 @@ Digest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b
 
 
 	def append(self, block_data):
+		if not block_data.startswith(b'--- !Hash\n'):
+			raise RuntimeError("Expecting a hash and a block in YAML.")
+
 		m = hashlib.sha384()
 		m.update(block_data)
 		m.update(block_data)

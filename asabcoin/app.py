@@ -120,7 +120,13 @@ class AsabCoinApplication(asab.Application):
 		if blockchain is None:
 			raise aiohttp.web.HTTPNotFound()
 
-		blockchain.append(await request.read())
+		try:
+			blockchain.append(await request.read())
+		except Exception as e:
+			return asab.web.rest.json_response(request, status=400, data={
+				'result': 'FAILED',
+				'message': str(e),
+			})
 
 		return asab.web.rest.json_response(request, data={'result': 'OK'})
 
