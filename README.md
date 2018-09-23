@@ -53,7 +53,10 @@ Later in the game, players run their mining code, and they can decide if they wa
  * Python (or other) runtime environment at each player laptop or PC
  * Text editor or IDE at each player laptop or PC
  * CoinGame Server
- * RabbitMQ 
+ * RabbitMQ
+
+Alternatively, you can use Docker to build and run CoinGame Server including all dependencies easily.
+Please refer to a relevant chapter below.
 
 ## Blockchain
 
@@ -135,3 +138,18 @@ Valid blocks must have a hash that conforms a declared difficulty.
 A reasonable value of the difficulty for a game is between 20 and 28.
 
 
+## Docker support
+
+You can quickly start CoinGame server in the Docker.
+
+ 1. Clone CoinGame GIT repository
+
+ 2. Build an image from a git repository:
+
+    docker build . -t coingame
+
+ 3. Start a Docker container
+
+    docker run coingame
+
+The containers offers a HTTP service (API and a simple UI) on a port TCP/80 and RabbitMQ/AMQP server on a port TCP/5672.
