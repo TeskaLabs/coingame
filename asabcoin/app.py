@@ -19,10 +19,6 @@ class AsabCoinApplication(asab.Application):
 		from asab.mom import Module
 		self.add_module(Module)
 
-		# Load the proactor service module
-		from asab.proactor import Module
-		self.add_module(Module)
-
 		# Locate web service
 		websvc = self.get_service("asab.WebService")
 
