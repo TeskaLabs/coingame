@@ -176,9 +176,38 @@ A player can select what types of messages he wants to consume or subscribe to a
 
     `channel.queue_bind(queue='~Tmyqueue', exchange='amq.topic', routing_key='#')`
 
+    A `routing_key` specifies a type of messages that you are interested in.
+    Special value `#` means all message types.
+    More details are here: https://www.rabbitmq.com/tutorials/tutorial-five-python.html
+
  3. Consume messages
 
     `channel.basic_consume(queue='~Tmyqueue', ...)`
+
+
+### Message type `transaction.added`
+
+The transaction has been added to a pool.
+
+    --- !Transaction
+    Data: !!binary |
+      e0Ftb3VudDogOC42LCBGcm9tOiA2NE5PM0tVVE9SQVQsIFRvOiAyMUxDUVEyM0hXMkN9Cg==
+    Fee: 0.1
+    Id: 199364695671660490824138862191540206604
+    ValidTo: 2018-09-23 10:37:53.112603
+
+
+### Message type `transaction.removed`
+
+The transaction has been removed from a pool.
+It is no longer valid and blocks with this transaction will not be accepted by a server.
+
+    --- !Transaction
+    Data: !!binary |
+      e0Ftb3VudDogOC42LCBGcm9tOiA2NE5PM0tVVE9SQVQsIFRvOiAyMUxDUVEyM0hXMkN9Cg==
+    Fee: 0.1
+    Id: 199364695671660490824138862191540206604
+    ValidTo: 2018-09-23 10:37:53.112603
 
 
 ## Docker support
@@ -193,6 +222,6 @@ You can quickly start CoinGame server in the Docker.
 
  3. Start a Docker container
 
-   `docker run coingame`
+    `docker run coingame`
 
 The containers offers a HTTP service (API and a simple UI) on a port TCP/80 and RabbitMQ/AMQP server on a port TCP/5672.
