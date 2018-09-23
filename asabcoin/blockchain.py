@@ -1,5 +1,6 @@
 import logging
 import hashlib
+import asyncio
 import yaml
 import os
 import io
@@ -32,8 +33,11 @@ class Blockchain(object):
 		self.LastDigest = None
 		self.Difficulty = difficulty
 		self.MiningFee = 1.0
+		self.Broker = app.Broker
+		self.Loop = app.Loop
 
 		self.TransactionPool = TransactionPool(app)
+		self.Blocks = None
 
 		if not os.path.isfile(self.Filename):
 			self.initialize("""--- !Hash
@@ -49,10 +53,8 @@ Transactions:
 --- !Hash
 Digest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b9493ba7fe4433e2439f5672a7'
 """)
-
-		# Validate a blockchain
-		for block in self:
-			pass
+		else:
+			self.load()
 
 
 	def initialize(self, first_block):
@@ -61,12 +63,15 @@ Digest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b
 
 		open(self.Filename, 'wb').write(first_block.encode('utf-8'))
 
-		# Validate a blockchain
-		for block in self:
-			pass
+		self.load()
 
 
 	def __iter__(self):
+		return iter(self.Blocks)
+
+	def load(self):
+		self.Blocks = []
+
 		try:
 			bci = iterate_blockchainfile(open(self.Filename, 'rb'))
 		except FileNotFoundError:
@@ -105,7 +110,7 @@ Digest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b
 			if exp_difficulty < block_obj.Difficulty:
 				raise RuntimeError("Calculated difficulty is lower than advertised.")
 
-			yield block_obj
+			self.Blocks.append(block_obj)
 
 		self.LastDigest = bhash_obj.Digest
 
@@ -167,6 +172,14 @@ Digest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b
 			+ "--- !Hash\nDigest: '{}'\n".format(m.hexdigest()).encode('utf-8')
 		)
 
-		# Validate a blockchain
-		for block in self:
-			pass
+		self.load()
+
+		msg = yaml.dump(block, explicit_start=True)
+		asyncio.ensure_future(
+			self.Broker.publish(
+				msg,
+				target="block.added",
+				content_type="text/yaml",
+			),
+			loop = self.Loop,
+		)
