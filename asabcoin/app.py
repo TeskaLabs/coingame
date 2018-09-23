@@ -42,7 +42,7 @@ class AsabCoinApplication(asab.Application):
 
 		# Initialize the blockchain(s)
 		self.Blockchains = {
-			'coingame': Blockchain(self, './gamecoin.yaml', difficulty=16)
+			'coingame': Blockchain(self, './gamecoin.yaml', difficulty=20)
 		}
 
 
