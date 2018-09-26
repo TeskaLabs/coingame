@@ -98,7 +98,7 @@ Each block contains a list of transactions.
 The list must contain at least 5 transactions (the exception is the first block with one transaction only).
 The maximum number of transactions in the block is 1000.
 
-The first transaction must a mining reward transaction, which contains only a miner reward in the `Fee` attribute.
+The first transaction must contain a mining reward transaction, which contains only a miner reward in the `Fee` attribute.
 The CoinServer provides a maximum miner fee value.
 
 ### Transaction attributes
