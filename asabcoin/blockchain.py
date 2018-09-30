@@ -186,3 +186,10 @@ Digest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b
 			),
 			loop = self.Loop,
 		)
+
+
+	def set_diffuculty(self, difficulty:int):
+		if self.Difficulty == difficulty: return
+
+		self.Difficulty = difficulty
+		#TODO: Send a message that informs about change in difficulty

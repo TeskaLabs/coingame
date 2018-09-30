@@ -1,4 +1,5 @@
 import os
+import uuid
 import aiohttp.web
 
 import asab
@@ -10,6 +11,7 @@ class AsabCoinApplication(asab.Application):
 
 
 	async def initialize(self):
+		self.AdminToken = None
 
 		# Load the web service module
 		from asab.web import Module
@@ -29,9 +31,10 @@ class AsabCoinApplication(asab.Application):
 		websvc.WebApp.router.add_put(r'/api/{blockchain}', self.upload)
 		websvc.WebApp.router.add_get(r'/api/{blockchain}/actuals', self.actuals)
 		websvc.WebApp.router.add_get(r'/api/{blockchain}/state', self.state)
+		websvc.WebApp.router.add_put(r'/api/{blockchain}/params', self.set_params)
 		websvc.WebApp.router.add_get(r'/api/{blockchain}/txpool', self.txpool)
 
-		websvc.add_frontend_web_app('/', os.environ.get('WEBAPPDIR', './webui'))
+		asab.web.StaticDirProvider(websvc.WebApp, '/', os.environ.get('WEBAPPDIR', './webui'))
 
 		# Prepare a message broker
 		from asab.mom.amqp import AMQPBroker
@@ -45,9 +48,12 @@ class AsabCoinApplication(asab.Application):
 			'coingame': Blockchain(self, './gamecoin.yaml', difficulty=20)
 		}
 
+		self.PubSub.subscribe("Application.tick/60!", self.new_admin_token)
+
 
 	async def main(self):
 		print("Ready.")
+		self.new_admin_token()
 
 
 	async def actuals(self, request):
@@ -161,3 +167,53 @@ class AsabCoinApplication(asab.Application):
 		await resp.drain()
 
 		return resp
+
+
+	async def set_params(self, request):
+		blockchain = self.Blockchains.get(request.match_info['blockchain'])
+		if blockchain is None:
+			raise aiohttp.web.HTTPNotFound()
+
+		a = request.headers.get("Authorization")
+		if a is None:
+			raise aiohttp.web.HTTPUnauthorized(headers={
+				'WWW-Authenticate': 'Bearer realm="CoinGame"'
+			})
+
+		try:
+			a = a.split(' ', 2)
+			if a[0] != 'Bearer':
+				raise aiohttp.web.HTTPUnauthorized(headers={
+					'WWW-Authenticate': 'Bearer realm="CoinGame"'
+				})
+
+			if a[1] != self.AdminToken or self.AdminToken is None:
+				raise aiohttp.web.HTTPUnauthorized(headers={
+					'WWW-Authenticate': 'Bearer realm="CoinGame"'
+				})
+
+		except:
+			raise aiohttp.web.HTTPUnauthorized(headers={
+				'WWW-Authenticate': 'Bearer realm="CoinGame"'
+			})
+
+		# Authentication / Authorization done
+
+		rbody = await request.json()
+		for k, v in rbody.items():
+			if k == 'Difficulty':
+				v = int(v)
+				assert(v>=0)
+				assert(v<400)
+				blockchain.set_diffuculty(v)
+			else:
+				L.error("Unknown parameter '{}' (value:'{}'') received".format(k, v))
+
+
+		return asab.web.rest.json_response(request, data={'result': 'OK'})
+
+
+	def new_admin_token(self, event_type=None):
+		self.AdminToken = uuid.uuid4().hex
+		print("Admin token:", self.AdminToken)
+
