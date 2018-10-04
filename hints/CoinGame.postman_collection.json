@@ -1,0 +1,691 @@
+{
+	"info": {
+		"_postman_id": "8a1bf01c-7469-491d-9868-997f5862bb93",
+		"name": "CoinGame",
+		"description": "More info at https://github.com/TeskaLabs/coingame",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Main",
+			"item": [
+				{
+					"name": "Get blockchain",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}"
+							]
+						},
+						"description": "Download of the canonical version of a blockchain in YAML."
+					},
+					"response": [
+						{
+							"name": "Get blockchain",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "yaml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/yaml",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Sep 2018 17:23:10 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.6 aiohttp/3.4.4 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "--- !Hash\nDigest: '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'\n--- !Block\nTimestamp: 2018-09-16T23:32:56.095486Z\nDifficulty: 32\nNonce: 77726441\nMiner: TeskaLabs\nTransactions:\n  - !Transaction\n    Fee: 1.0\n--- !Hash\nDigest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b9493ba7fe4433e2439f5672a7'\n"
+						}
+					]
+				},
+				{
+					"name": "Get state of the blockchain",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/state",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}",
+								"state"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get state of the blockchain",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/state",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}",
+										"state"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "140",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Sep 2018 17:24:35 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.6 aiohttp/3.4.4 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"Digest\": \"00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b9493ba7fe4433e2439f5672a7\", \"Difficulty\": 16, \"Fee\": 1.0}"
+						}
+					]
+				},
+				{
+					"name": "Get actuals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/actuals",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}",
+								"actuals"
+							]
+						},
+						"description": "Retrieve an actual score."
+					},
+					"response": [
+						{
+							"name": "Get actuals",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/actuals",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}",
+										"actuals"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "18",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Sep 2018 17:26:42 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.6 aiohttp/3.4.4 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"TeskaLabs\": 1,\n    \"Player1\": 42\n}"
+						}
+					]
+				},
+				{
+					"name": "Get transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/txpool",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}",
+								"txpool"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get transactions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/txpool",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}",
+										"txpool"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "yaml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/yaml",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Sep 2018 17:27:07 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.6 aiohttp/3.4.4 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy4zLCBGcm9tOiA4RjJRRVpPU0xTRDgsIFRvOiBSQjBERlVPNzUwV1V9Cg==\nFee: 0.1\nId: 224854394478865477800269471191967793154\nValidTo: 2018-09-22 17:27:37.756095\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC4zLCBGcm9tOiBHOFcwQTBWVUZLOTIsIFRvOiAxRzM0RVRaRDFHSUt9Cg==\nFee: 0.1\nId: 224855798560361555590971043934173724674\nValidTo: 2018-09-22 17:27:37.757848\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi40LCBGcm9tOiBHQUszTEswTlU4N08sIFRvOiBYMzVGVVZHVUw0RUh9Cg==\nFee: 0.1\nId: 224856772116022530871875065567358550018\nValidTo: 2018-09-22 17:27:37.759076\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTcuNCwgRnJvbTogQ1hLSERRUDNBWFU0LCBUbzogQ1VKTkpOUlBWOVNQfQo=\nFee: 0.1\nId: 224857746622421456322401900051255328770\nValidTo: 2018-09-22 17:27:37.760300\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS4xLCBGcm9tOiBRQ1dKQzVOUE5OTUYsIFRvOiBMMVJLMkpBRTExSkd9Cg==\nFee: 0.1\nId: 224858839812607828141690920424082309122\nValidTo: 2018-09-22 17:27:37.761682\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNy44LCBGcm9tOiBUNzFONDBQWE5MNVksIFRvOiBNQk1IS1VPS0lKSzJ9Cg==\nFee: 0.1\nId: 225652986310239732275815502416536731650\nValidTo: 2018-09-22 17:27:38.764039\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi4yLCBGcm9tOiBDTUtISE1NMVFWRjksIFRvOiBFSlhKWFMxUVlKSER9Cg==\nFee: 0.1\nId: 225653941009598029157082619302173016066\nValidTo: 2018-09-22 17:27:38.765238\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTUuNiwgRnJvbTogRzdRV0ZPTTVDRDRULCBUbzogTlVVUjNSTTFTQUNTfQo=\nFee: 0.1\nId: 225655028812269350007970128433823940610\nValidTo: 2018-09-22 17:27:38.766616\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC4yLCBGcm9tOiBMQllMOUVONkoxMkssIFRvOiAyNExET1VDTDEwNVF9Cg==\nFee: 0.1\nId: 225656074940927188355896565204696236034\nValidTo: 2018-09-22 17:27:38.767939\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC43LCBGcm9tOiBTSjFHMjlZS0NINVEsIFRvOiBOSzJOS1BFRTU0OUR9Cg==\nFee: 0.1\nId: 225657023777401459184653044490693574658\nValidTo: 2018-09-22 17:27:38.769129\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTMuOSwgRnJvbTogQ1owT1gyRlQ2OEFMLCBUbzogUTFCNlJSRzlTVkRGfQo=\nFee: 0.1\nId: 226453174747544974200398914201448415234\nValidTo: 2018-09-22 17:27:39.774019\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTMuNywgRnJvbTogMjJHUFJaS1VHQjRELCBUbzogRTVSV1VaV0FNTklDfQo=\nFee: 0.1\nId: 226454637616337637579539074572474187778\nValidTo: 2018-09-22 17:27:39.775876\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTIuNywgRnJvbTogMzZKTjVXUFpCSVdXLCBUbzogR05aRUxVMEpWNlRSfQo=\nFee: 0.1\nId: 226455979741410629217410027907644981250\nValidTo: 2018-09-22 17:27:39.777564\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi4xLCBGcm9tOiBVMEY2U0k5S1ZQMlAsIFRvOiA3TFE4Ujc2MVdMTDV9Cg==\nFee: 0.1\nId: 226457008122960064365928051821916520450\nValidTo: 2018-09-22 17:27:39.778856\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTAuNSwgRnJvbTogWjJZNTJQVkxDSUpPLCBUbzogVkFQMzNHUkVTRkIxfQo=\nFee: 0.1\nId: 226457922415955478977033525565351591938\nValidTo: 2018-09-22 17:27:39.780079\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTUuNSwgRnJvbTogQTZLWUZaUTZHSVg0LCBUbzogUzNOMlJWQlhBS0pPfQo=\nFee: 0.1\nId: 227252506886869761960725061824179929090\nValidTo: 2018-09-22 17:27:40.782919\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy41LCBGcm9tOiBKNjE5QVVCRURMUFcsIFRvOiBOTlhTU1dEVDlVQ1F9Cg==\nFee: 0.1\nId: 227253367463170991899322180601342132226\nValidTo: 2018-09-22 17:27:40.783997\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS44LCBGcm9tOiBRSU1SWVVLNE43TFEsIFRvOiAyME5VWTFQMEtFWFV9Cg==\nFee: 0.1\nId: 227254194446731315790312756201766584322\nValidTo: 2018-09-22 17:27:40.785039\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTkuNSwgRnJvbTogUFMwTFA4UFJQSTZJLCBUbzogRE5LNFAyQ01ITElWfQo=\nFee: 0.1\nId: 227255102401473729259111545557637726210\nValidTo: 2018-09-22 17:27:40.786191\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTkuOSwgRnJvbTogU0c5RFQwQlJWMUtRLCBUbzogOUNMMUozUklKSjgzfQo=\nFee: 0.1\nId: 227255938892413554864840325608651161602\nValidTo: 2018-09-22 17:27:40.787244\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi40LCBGcm9tOiBYSjRIQ01ETEM4NTksIFRvOiBESldLNTQzOFJGSTV9Cg==\nFee: 0.1\nId: 228050820944306241423568068143796518914\nValidTo: 2018-09-22 17:27:41.790606\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS44LCBGcm9tOiAyNDVQUTdGV09KSFIsIFRvOiA5SFVTUE9ZSUtDOU59Cg==\nFee: 0.1\nId: 228052739216577036793985608216627707906\nValidTo: 2018-09-22 17:27:41.792969\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi41LCBGcm9tOiBSNzAyUEJJRThWQzQsIFRvOiA1WldNSTZFU1MwS0N9Cg==\nFee: 0.1\nId: 228053757456921670117807549388021628930\nValidTo: 2018-09-22 17:27:41.794231\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTIuMiwgRnJvbTogTVFCRklKQVNCU0xELCBUbzogQ05DM1U1V081MVFTfQo=\nFee: 0.1\nId: 228055182613108976703590785749385019394\nValidTo: 2018-09-22 17:27:41.796086\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTEuOSwgRnJvbTogRUFDSUQwRzdQMEJQLCBUbzogTDQyUVVOV1NNSjZOfQo=\nFee: 0.1\nId: 228056789201788440958410759069953490946\nValidTo: 2018-09-22 17:27:41.798089\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC4wLCBGcm9tOiAyNkZYSjk2UFlQMTQsIFRvOiBPV0hMT1lZVUJLWUF9Cg==\nFee: 0.1\nId: 228852037604704593475264960316438544386\nValidTo: 2018-09-22 17:27:42.801827\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTYuNCwgRnJvbTogNzdENTBPWUI4VDA1LCBUbzogQUJPTlpIVjJUOFc3fQo=\nFee: 0.1\nId: 228853670655590337492361425272181948418\nValidTo: 2018-09-22 17:27:42.803875\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS4wLCBGcm9tOiAyNFFYVDhOUDRBRlIsIFRvOiBKWVBXOTE3N0ZSQUV9Cg==\nFee: 0.1\nId: 228854985526175424220165178137630539778\nValidTo: 2018-09-22 17:27:42.805536\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTguMSwgRnJvbTogSVlBU0kwNzlWV1lELCBUbzogNklHNzI2N0dJRk4yfQo=\nFee: 0.1\nId: 228856291206293659300512936930657239042\nValidTo: 2018-09-22 17:27:42.807179\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy44LCBGcm9tOiBVN0FBR0xVU1QzUEUsIFRvOiBXSklFWk8yUjFLNkp9Cg==\nFee: 0.1\nId: 228857639986532302133672448839774175234\nValidTo: 2018-09-22 17:27:42.808881\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTEuNCwgRnJvbTogV0NFR01MNUVKOFk5LCBUbzogRlU1QUpITjBHOUlXfQo=\nFee: 0.1\nId: 229653659596382368502711187559723106306\nValidTo: 2018-09-22 17:27:43.813596\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTEuMywgRnJvbTogTVZSUFI1UFlDNkVZLCBUbzogOTZBRU5LVVdTMDJMfQo=\nFee: 0.1\nId: 229655216112863123737935239885706297346\nValidTo: 2018-09-22 17:27:43.815568\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNC43LCBGcm9tOiBMVDVYMFc5QUtXSzMsIFRvOiBQSTQ3REcxSDVIWTV9Cg==\nFee: 0.1\nId: 229656205672612926901389784294259490818\nValidTo: 2018-09-22 17:27:43.816808\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTQuNCwgRnJvbTogWDFZMFMySVpBQkswLCBUbzogVExLUDJRVDlMTENJfQo=\nFee: 0.1\nId: 229657007144704921198564470931382665218\nValidTo: 2018-09-22 17:27:43.817814\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTUuNCwgRnJvbTogWEtaQTQ1TVdHTFYyLCBUbzogT0tCTzQ4OTU3NDJRfQo=\nFee: 0.1\nId: 229657932688099412834017214131409584130\nValidTo: 2018-09-22 17:27:43.818986\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi4wLCBGcm9tOiA5TTgwWlZaT0JZVlUsIFRvOiBDS0hHMDNTVTBEMTF9Cg==\nFee: 0.1\nId: 230453150984313809932963160021030469634\nValidTo: 2018-09-22 17:27:44.822706\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC41LCBGcm9tOiBQQlBCSk1aOUZIOUEsIFRvOiAwQzNYV0c0TTBaMUF9Cg==\nFee: 0.1\nId: 230454155438958165774085828049070260226\nValidTo: 2018-09-22 17:27:44.823961\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy45LCBGcm9tOiBLVTNVU0pKTUNWOEcsIFRvOiBHSDRKQ1lQSDZXMUh9Cg==\nFee: 0.1\nId: 230455374760379260302106566176621527042\nValidTo: 2018-09-22 17:27:44.825506\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi40LCBGcm9tOiBBWjY4T0gzNzBTR0gsIFRvOiBNMTRQUFhQSzROVDJ9Cg==\nFee: 0.1\nId: 230456314881755654566796727708187426818\nValidTo: 2018-09-22 17:27:44.826686\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTEuMywgRnJvbTogQlJJOUc2MFg3RDdFLCBUbzogTzlRTDdOVkRFUldBfQo=\nFee: 0.1\nId: 230457214121400191465122265889739177986\nValidTo: 2018-09-22 17:27:44.827819\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTEuNCwgRnJvbTogTENIRVMxTUdROEZILCBUbzogQkpLVTNFVEY5QzhOfQo=\nFee: 0.1\nId: 231252555855091785788957210083872276482\nValidTo: 2018-09-22 17:27:45.831709\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi4zLCBGcm9tOiBYMFBONUpNQkRZUFIsIFRvOiA3UjdIT1Q0QzlFQU19Cg==\nFee: 0.1\nId: 231255006223702026952608968374037315586\nValidTo: 2018-09-22 17:27:45.834791\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNC4zLCBGcm9tOiBJQ1NXSkpMNUlINlUsIFRvOiBVRUkyUkpSV0xQN1N9Cg==\nFee: 0.1\nId: 231256138235688030761133771832364695554\nValidTo: 2018-09-22 17:27:45.836211\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC40LCBGcm9tOiBQS1g3MjJYVUVGMDYsIFRvOiBITE5NMlhKQjA0OTN9Cg==\nFee: 0.1\nId: 231257070909617148684963251721870573570\nValidTo: 2018-09-22 17:27:45.837382\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTIuOSwgRnJvbTogOUZJR05IRDZBQ1k4LCBUbzogSzJHSTZLVzJQU0xRfQo=\nFee: 0.1\nId: 231257979339728537235788252608545751042\nValidTo: 2018-09-22 17:27:45.838529\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTguOCwgRnJvbTogMzYxRDU4SDNGNFQ1LCBUbzogSzY2NFA0OFUyNFQ2fQo=\nFee: 0.1\nId: 232052894667449479786998358086301843458\nValidTo: 2018-09-22 17:27:46.841858\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTYuNCwgRnJvbTogRTJMSVlLREpMTVNVLCBUbzogMlFNTDMyNkNKVlVPfQo=\nFee: 0.1\nId: 232053741299594107217997429832682635266\nValidTo: 2018-09-22 17:27:46.843010\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC45LCBGcm9tOiBQVzlHSkxGVVZIU0gsIFRvOiA3NzNGUTlIQ01JQ0Z9Cg==\nFee: 0.1\nId: 232054850810781956977048571642291224578\nValidTo: 2018-09-22 17:27:46.844324\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTEuMSwgRnJvbTogVTJVTU9CWjZLV044LCBUbzogWjNHOUpQN1FJUTFCfQo=\nFee: 0.1\nId: 232055655610456776874463159064124784642\nValidTo: 2018-09-22 17:27:46.845335\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNC43LCBGcm9tOiBGQkFZVTVDRFlETEcsIFRvOiBFOVVZNk02VEJBVkt9Cg==\nFee: 0.1\nId: 232056880953218222485271451058752782338\nValidTo: 2018-09-22 17:27:46.846894\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTAuMywgRnJvbTogQjhRS0dGWldENlZOLCBUbzogWUpPWkNBNTg0OEcxfQo=\nFee: 0.1\nId: 232852042205155609310010537868075794434\nValidTo: 2018-09-22 17:27:47.850522\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS42LCBGcm9tOiAwTkMwT01OWDBPSkMsIFRvOiA0TkoxT0hDNVk1OTh9Cg==\nFee: 0.1\nId: 232852873467036708974081367562702094338\nValidTo: 2018-09-22 17:27:47.851566\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTkuMSwgRnJvbTogNFRWOEhEU0M2SVkxLCBUbzogR1dMQ1M0RzAwUlZNfQo=\nFee: 0.1\nId: 232853800753450775922657390852964417538\nValidTo: 2018-09-22 17:27:47.852757\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTcuMCwgRnJvbTogRkJFRVJHVEpZS1BKLCBUbzogVTFLVDNITVpZMTc4fQo=\nFee: 0.1\nId: 232854735645768444241378249809866063874\nValidTo: 2018-09-22 17:27:47.853920\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTQuNywgRnJvbTogOVVXOEpTOEtFRTlRLCBUbzogSVpEN1VSQkpTRTRFfQo=\nFee: 0.1\nId: 232855552329667641279196140351016468482\nValidTo: 2018-09-22 17:27:47.854948\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS40LCBGcm9tOiA5UFI4U0JJSFdHRTEsIFRvOiBTUjVYUFhYVTJERUh9Cg==\nFee: 0.1\nId: 233649739709031402768325578583396384770\nValidTo: 2018-09-22 17:27:48.857358\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOC40LCBGcm9tOiBNM0w1NThTRzc4UDQsIFRvOiA4SDJKS083NDZEOFR9Cg==\nFee: 0.1\nId: 233650937321935968388865542326490038274\nValidTo: 2018-09-22 17:27:48.858870\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi4wLCBGcm9tOiBTRFc1NjUwUTFOVDQsIFRvOiBTUU9EWUw2U0xKTjV9Cg==\nFee: 0.1\nId: 233652124952092057211587529250362687490\nValidTo: 2018-09-22 17:27:48.860371\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS4xLCBGcm9tOiBNMktMOUE4TzA0QzksIFRvOiBDT01FMjBHVzRHWVR9Cg==\nFee: 0.1\nId: 233653208951811577374174946990752858114\nValidTo: 2018-09-22 17:27:48.861739\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy4yLCBGcm9tOiA5RDJGRlFEOFJUUVksIFRvOiBVVk1DNDE5NEExTkV9Cg==\nFee: 0.1\nId: 233654102803941063307441489279567593474\nValidTo: 2018-09-22 17:27:48.862860\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy4zLCBGcm9tOiA5MDc3RTJLWUIxR1csIFRvOiBYRzhCTDNWUFZYS1B9Cg==\nFee: 0.1\nId: 234448198754005283335520559487624740866\nValidTo: 2018-09-22 17:27:49.865155\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTQuMSwgRnJvbTogTjgyM0RNOUdEUU9XLCBUbzogMkNOMVo3RUpWREo3fQo=\nFee: 0.1\nId: 234449165812956932447788667014174801922\nValidTo: 2018-09-22 17:27:49.866379\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTAuMCwgRnJvbTogOFY5UlpNQ0ZXSFlPLCBUbzogMkgzWFA0NURZRVoxfQo=\nFee: 0.1\nId: 234450026389258162387215855497656729602\nValidTo: 2018-09-22 17:27:49.867457\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTcuOCwgRnJvbTogNFQwNVA3RzcxQVZVLCBUbzogSUpVQVhZRFFCRFJQfQo=\nFee: 0.1\nId: 234450828019806481711805702314000449538\nValidTo: 2018-09-22 17:27:49.868470\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTAuMCwgRnJvbTogQkNGMktNWTQzRzEzLCBUbzogOU9HRlAxMU1OQjVFfQo=\nFee: 0.1\nId: 234451748492598572436894099040956907522\nValidTo: 2018-09-22 17:27:49.869635\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTcuOCwgRnJvbTogMVY0WlIwWDdaNFE2LCBUbzogTkkzNDM1RldUQTJBfQo=\nFee: 0.1\nId: 235248715829728634431629186890246193154\nValidTo: 2018-09-22 17:27:50.875555\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNC42LCBGcm9tOiBHNDBDVU9HUVhFN0IsIFRvOiBXM1I5VUVESzlETVV9Cg==\nFee: 0.1\nId: 235249763384493398034522393593122979842\nValidTo: 2018-09-22 17:27:50.876881\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNy40LCBGcm9tOiBLQllUWDVOM1NWSjAsIFRvOiBMNzdTVldKUzExMVh9Cg==\nFee: 0.1\nId: 235250954342232312456011885698532573186\nValidTo: 2018-09-22 17:27:50.878378\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTUuMSwgRnJvbTogRjU0UTlRRk5TUFVRLCBUbzogWTdIWVFRV1Y4WVFMfQo=\nFee: 0.1\nId: 235252009027531702344861707241130098690\nValidTo: 2018-09-22 17:27:50.879707\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi4zLCBGcm9tOiA4TUJIUTUyNExPTDgsIFRvOiAyRDBRTzNETDI0Mjh9Cg==\nFee: 0.1\nId: 235252830465120650236961341725524164610\nValidTo: 2018-09-22 17:27:50.880740\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNy44LCBGcm9tOiBOQks5VlI1UE9XT0EsIFRvOiA4OUlCRUJTU0JMRTR9Cg==\nFee: 0.1\nId: 236051738892232311710005913182935252994\nValidTo: 2018-09-22 17:27:51.889110\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTguNywgRnJvbTogVUhRTVFCV1U5MjBTLCBUbzogTk5IVEU1UTE2Q1lOfQo=\nFee: 0.1\nId: 236052580770687188283200581652538523650\nValidTo: 2018-09-22 17:27:51.890163\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTYuNywgRnJvbTogTU9KM0pCNDBLU1FGLCBUbzogTjNGNVAyUk9OVUZQfQo=\nFee: 0.1\nId: 236053469710670598329447246534313836546\nValidTo: 2018-09-22 17:27:51.891287\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS42LCBGcm9tOiBWSzBURThQQkRGMk4sIFRvOiBNMlExQ0kxNjg1U0J9Cg==\nFee: 0.1\nId: 236054276570277643599238813663831851010\nValidTo: 2018-09-22 17:27:51.892306\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy4xLCBGcm9tOiBBNkpHTVZVNkRRVkQsIFRvOiBLUU1JQ09GNlJTVUZ9Cg==\nFee: 0.1\nId: 236055065207407310586611719887364620290\nValidTo: 2018-09-22 17:27:51.893299\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTAuNSwgRnJvbTogRkpHUkJNMTRGNEE2LCBUbzogUFhYS1lNTzBGWFE1fQo=\nFee: 0.1\nId: 236848866111794327493390679362788982786\nValidTo: 2018-09-22 17:27:52.895223\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNC4zLCBGcm9tOiBKVzRZUjJIRVYyMUEsIFRvOiBZMllPQzhaQUFFMEx9Cg==\nFee: 0.1\nId: 236849730174134708058814478247422656514\nValidTo: 2018-09-22 17:27:52.896309\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTAuMiwgRnJvbTogVUZaWVBRQzdRTzRaLCBUbzogUUZRMzkyNDFXRTdBfQo=\nFee: 0.1\nId: 236850540202868253899844955963642675202\nValidTo: 2018-09-22 17:27:52.897332\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNy4wLCBGcm9tOiA0WEpWU1lESEkwU0ksIFRvOiBLSUhKUFVIMEJMVjh9Cg==\nFee: 0.1\nId: 236851366711059602705251476327640399874\nValidTo: 2018-09-22 17:27:52.898374\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTcuOCwgRnJvbTogUUw3TUhUQURGM1RSLCBUbzogOUtVOVhBTEJYTDdVfQo=\nFee: 0.1\nId: 236852160260335345574024330573207633922\nValidTo: 2018-09-22 17:27:52.899374\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNC4xLCBGcm9tOiA2RTJZQzQ0RVM1TkwsIFRvOiBIOFVTTDM3Qlk5R0x9Cg==\nFee: 0.1\nId: 237647777391119839479920441940344111106\nValidTo: 2018-09-22 17:27:53.903594\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTIuOCwgRnJvbTogR0cxTlhFQlBWRk5YLCBUbzogUFdPVkhQR0o0NUpafQo=\nFee: 0.1\nId: 237648728129070010650514931463270498306\nValidTo: 2018-09-22 17:27:53.904789\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS42LCBGcm9tOiA2OFFERkc4RlpTUk0sIFRvOiAxTFYyMFFVUURJMVV9Cg==\nFee: 0.1\nId: 237649730206869491068947128376460640258\nValidTo: 2018-09-22 17:27:53.906053\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTkuMCwgRnJvbTogUVJDTEZFRU1IMUZNLCBUbzogWFBSOUhMUTVVOFhTfQo=\nFee: 0.1\nId: 237650526291446434396981431958542286850\nValidTo: 2018-09-22 17:27:53.907054\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTkuOCwgRnJvbTogWEZRUkkzQ1JSNDJGLCBUbzogSUZONk03OTY1SUtYfQo=\nFee: 0.1\nId: 237651517118846837785631077614857814018\nValidTo: 2018-09-22 17:27:53.908315\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNy4xLCBGcm9tOiBMS01NTVg4VVZWVUUsIFRvOiBPT1BLTExGN1k5N1d9Cg==\nFee: 0.1\nId: 238446625287915340054819125996060475394\nValidTo: 2018-09-22 17:27:54.911882\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy4wLCBGcm9tOiBSVU83NzBTSVBZRkQsIFRvOiA1NVgxRU1WSlFYRk19Cg==\nFee: 0.1\nId: 238447499491460522447845518233086001154\nValidTo: 2018-09-22 17:27:54.912978\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi44LCBGcm9tOiBYMEoyQk9WU0oyVEssIFRvOiA4VzdJMktQSVZSSE19Cg==\nFee: 0.1\nId: 238448354521790376390482413351729168386\nValidTo: 2018-09-22 17:27:54.914056\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNi45LCBGcm9tOiA3MUIwUUowRkMzS1gsIFRvOiBDVEtSVVpDRDFBQll9Cg==\nFee: 0.1\nId: 238449180554612750108969279714808102914\nValidTo: 2018-09-22 17:27:54.915099\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTEuOCwgRnJvbTogVTdBMkI2Mkg1WDJQLCBUbzogMklMUTNSRDJMTE5GfQo=\nFee: 0.1\nId: 238450115446930418427799069487696773122\nValidTo: 2018-09-22 17:27:54.916281\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTQuOSwgRnJvbTogV1cwOVk1RjlITUc3LCBUbzogUlBMNFpQRjFOMDZZfQo=\nFee: 0.1\nId: 239245905453565518455915291454922096642\nValidTo: 2018-09-22 17:27:55.920713\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTMuNCwgRnJvbTogNlFRTVhDNlBWNUpNLCBUbzogWEg0UkkyVEhUWkFJfQo=\nFee: 0.1\nId: 239246746222826119832662521395731824642\nValidTo: 2018-09-22 17:27:55.921768\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMy4yLCBGcm9tOiBKSVVUTVRBWE1IVkcsIFRvOiBRT09RRjA5VEdWMk59Cg==\nFee: 0.1\nId: 239247563857463267038942421983639437314\nValidTo: 2018-09-22 17:27:55.922801\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTUuNSwgRnJvbTogTjFDQkdYSUc3QjEzLCBUbzogU1o3MDNEUFlFMVE1fQo=\nFee: 0.1\nId: 239248362318885085794135048985898975234\nValidTo: 2018-09-22 17:27:55.923808\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogNS4wLCBGcm9tOiBYTktZOU1BMU5DSDUsIFRvOiBBV01WVzFTN01ISE99Cg==\nFee: 0.1\nId: 239249145568499701813100251518768054274\nValidTo: 2018-09-22 17:27:55.924795\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogOS41LCBGcm9tOiBJQko0OE9WNENZVFMsIFRvOiBCMVhMN1oxSE0wNEF9Cg==\nFee: 0.1\nId: 240043349427321266271174915695869755394\nValidTo: 2018-09-22 17:27:56.927228\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTcuMCwgRnJvbTogU0FXWk1TMzJYODA5LCBUbzogSVdMNEwzVlVSQU9PfQo=\nFee: 0.1\nId: 240044240427236901687488495151465168898\nValidTo: 2018-09-22 17:27:56.928350\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTguNCwgRnJvbTogS0wzQ05OTzdaWVJVLCBUbzogNDJDNDRaVVo1MFVLfQo=\nFee: 0.1\nId: 240045037779464445244795065018963001346\nValidTo: 2018-09-22 17:27:56.929353\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMTAuOCwgRnJvbTogQkVUQVNRTTM1UzZGLCBUbzogRlhHTUhUWTkyQUs0fQo=\nFee: 0.1\nId: 240045828159613687544854120693899526146\nValidTo: 2018-09-22 17:27:56.930350\n--- !Transaction\nData: !!binary |\n  e0Ftb3VudDogMjAuMCwgRnJvbTogVExPN0dSS1ZOSUxaLCBUbzogTFJNUlNGOVI0Q0VHfQo=\nFee: 0.1\nId: 240046680337729690971993560083894173698\nValidTo: 2018-09-22 17:27:56.931427\n"
+						}
+					]
+				},
+				{
+					"name": "Upload a new block to blockchain",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "--- !Hash\nDigest: '0000000097259cdbbf6438494ab23634119727008c74972da217419ae9062c0617e20495b4c2f8081da2369dc43d9ade'\n--- !Block\nTimestamp: 2018-09-15T21:04:06.758144Z\nDifficulty: 20\nNonce: 39665226\nMiner: TeskaLabs\nTransactions:\n  - !Transaction\n    Id: 1\n    Fee: 1.0\n"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}"
+							]
+						},
+						"description": "Upload a new block to a CoinGame server.\nThe server will validate the block and if the block is valid, it will be added to a blockchain.\nYou must provide a previous hash and a current (new) block as a text, the server will calculate the hash of the block to verify a difficulty."
+					},
+					"response": [
+						{
+							"name": "Upload a new block to blockchain",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "--- !Hash\nDigest: '00000000b9d0b0ceeee295cb2c02387d16ecf3b52a0811f165e5902ef78659db96e409b9493ba7fe4433e2439f5672a7'\n--- !Block\nTimestamp: 2018-09-22T20:00:24.842926Z\nDifficulty: 16\nNonce: 19914415\nMiner: FallenAngel\nTransactions:\n  - !Transaction\n    Fee: 1.0\n  - !Transaction\n    Id: 43567217229395353759217927915340332044\n    Fee: 0.1\n    Data: !!binary |\n      e0Ftb3VudDogMTQuNywgRnJvbTogSEZMSUc2UEkzMDdTLCBUbzogQVFRTVFCOU05MUJGfQo=\n  - !Transaction\n    Id: 44361246627803061806440680998244744204\n    Fee: 0.1\n    Data: !!binary |\n      e0Ftb3VudDogMTUuMSwgRnJvbTogTzNSNzg2TzNHMkRXLCBUbzogSFdXOThBUzIwVU41fQo=\n  - !Transaction\n    Id: 44362017517824325598445466180881513484\n    Fee: 0.1\n    Data: !!binary |\n      e0Ftb3VudDogMy40LCBGcm9tOiBXUVNXRkdYRzFaRkwsIFRvOiAySlFWWUw1Q0VZT0p9Cg==\n  - !Transaction\n    Id: 44362734532695079690700687753632054284\n    Fee: 0.1\n    Data: !!binary |\n      e0Ftb3VudDogOS44LCBGcm9tOiBNSjNTQjU3MzJZTkEsIFRvOiBFV09YMVFBMjNIWEp9Cg==\n  - !Transaction\n    Id: 43565111344835724613124691517140401164\n    Fee: 0.1\n    Data: !!binary |\n      e0Ftb3VudDogMTUuOSwgRnJvbTogQkkzUkIzTVg2UVJDLCBUbzogNk5BT0w2SlpSWktEfQo=\n  - !Transaction\n    Id: 44363490369365465772481330162918259724\n    Fee: 0.1\n    Data: !!binary |\n      e0Ftb3VudDogNC45LCBGcm9tOiBXSFZYVUlHS1Y4RjksIFRvOiBBQzlJUVVPRzVaNFJ9Cg==\n"
+								},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "79",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 23 Sep 2018 08:33:25 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.7 aiohttp/3.3.2 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"result\": \"FAILED\", \"message\": \"Transaction from a block is not in the pool.\"}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "JSON",
+			"item": [
+				{
+					"name": "Get blockchain in JSON",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}"
+							]
+						},
+						"description": "Informative extract of the blockchain in the JSON.\nNot all attributes are available via JSON."
+					},
+					"response": [
+						{
+							"name": "Get blockchain in JSON",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/json",
+										"disabled": false
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "127",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Sep 2018 17:24:06 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.6 aiohttp/3.4.4 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "[{\"Timestamp\": \"2018-09-16T23:32:56.095486\", \"Difficulty\": 32, \"Nonce\": 77726441, \"Miner\": \"TeskaLabs\", \"TransactionCount\": 1}]"
+						}
+					]
+				},
+				{
+					"name": "Get transactions in JSON",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/txpool",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}",
+								"txpool"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get transactions in JSON",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/json",
+										"disabled": false
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/txpool",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}",
+										"txpool"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "6300",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Sep 2018 17:27:17 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.6 aiohttp/3.4.4 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "[{\"Id\": \"224854394478865477800269471191967793154\", \"Fee\": 0.1}, {\"Id\": \"224855798560361555590971043934173724674\", \"Fee\": 0.1}, {\"Id\": \"224856772116022530871875065567358550018\", \"Fee\": 0.1}, {\"Id\": \"224857746622421456322401900051255328770\", \"Fee\": 0.1}, {\"Id\": \"224858839812607828141690920424082309122\", \"Fee\": 0.1}, {\"Id\": \"225652986310239732275815502416536731650\", \"Fee\": 0.1}, {\"Id\": \"225653941009598029157082619302173016066\", \"Fee\": 0.1}, {\"Id\": \"225655028812269350007970128433823940610\", \"Fee\": 0.1}, {\"Id\": \"225656074940927188355896565204696236034\", \"Fee\": 0.1}, {\"Id\": \"225657023777401459184653044490693574658\", \"Fee\": 0.1}, {\"Id\": \"226453174747544974200398914201448415234\", \"Fee\": 0.1}, {\"Id\": \"226454637616337637579539074572474187778\", \"Fee\": 0.1}, {\"Id\": \"226455979741410629217410027907644981250\", \"Fee\": 0.1}, {\"Id\": \"226457008122960064365928051821916520450\", \"Fee\": 0.1}, {\"Id\": \"226457922415955478977033525565351591938\", \"Fee\": 0.1}, {\"Id\": \"227252506886869761960725061824179929090\", \"Fee\": 0.1}, {\"Id\": \"227253367463170991899322180601342132226\", \"Fee\": 0.1}, {\"Id\": \"227254194446731315790312756201766584322\", \"Fee\": 0.1}, {\"Id\": \"227255102401473729259111545557637726210\", \"Fee\": 0.1}, {\"Id\": \"227255938892413554864840325608651161602\", \"Fee\": 0.1}, {\"Id\": \"228050820944306241423568068143796518914\", \"Fee\": 0.1}, {\"Id\": \"228052739216577036793985608216627707906\", \"Fee\": 0.1}, {\"Id\": \"228053757456921670117807549388021628930\", \"Fee\": 0.1}, {\"Id\": \"228055182613108976703590785749385019394\", \"Fee\": 0.1}, {\"Id\": \"228056789201788440958410759069953490946\", \"Fee\": 0.1}, {\"Id\": \"228852037604704593475264960316438544386\", \"Fee\": 0.1}, {\"Id\": \"228853670655590337492361425272181948418\", \"Fee\": 0.1}, {\"Id\": \"228854985526175424220165178137630539778\", \"Fee\": 0.1}, {\"Id\": \"228856291206293659300512936930657239042\", \"Fee\": 0.1}, {\"Id\": \"228857639986532302133672448839774175234\", \"Fee\": 0.1}, {\"Id\": \"229653659596382368502711187559723106306\", \"Fee\": 0.1}, {\"Id\": \"229655216112863123737935239885706297346\", \"Fee\": 0.1}, {\"Id\": \"229656205672612926901389784294259490818\", \"Fee\": 0.1}, {\"Id\": \"229657007144704921198564470931382665218\", \"Fee\": 0.1}, {\"Id\": \"229657932688099412834017214131409584130\", \"Fee\": 0.1}, {\"Id\": \"230453150984313809932963160021030469634\", \"Fee\": 0.1}, {\"Id\": \"230454155438958165774085828049070260226\", \"Fee\": 0.1}, {\"Id\": \"230455374760379260302106566176621527042\", \"Fee\": 0.1}, {\"Id\": \"230456314881755654566796727708187426818\", \"Fee\": 0.1}, {\"Id\": \"230457214121400191465122265889739177986\", \"Fee\": 0.1}, {\"Id\": \"231252555855091785788957210083872276482\", \"Fee\": 0.1}, {\"Id\": \"231255006223702026952608968374037315586\", \"Fee\": 0.1}, {\"Id\": \"231256138235688030761133771832364695554\", \"Fee\": 0.1}, {\"Id\": \"231257070909617148684963251721870573570\", \"Fee\": 0.1}, {\"Id\": \"231257979339728537235788252608545751042\", \"Fee\": 0.1}, {\"Id\": \"232052894667449479786998358086301843458\", \"Fee\": 0.1}, {\"Id\": \"232053741299594107217997429832682635266\", \"Fee\": 0.1}, {\"Id\": \"232054850810781956977048571642291224578\", \"Fee\": 0.1}, {\"Id\": \"232055655610456776874463159064124784642\", \"Fee\": 0.1}, {\"Id\": \"232056880953218222485271451058752782338\", \"Fee\": 0.1}, {\"Id\": \"232852042205155609310010537868075794434\", \"Fee\": 0.1}, {\"Id\": \"232852873467036708974081367562702094338\", \"Fee\": 0.1}, {\"Id\": \"232853800753450775922657390852964417538\", \"Fee\": 0.1}, {\"Id\": \"232854735645768444241378249809866063874\", \"Fee\": 0.1}, {\"Id\": \"232855552329667641279196140351016468482\", \"Fee\": 0.1}, {\"Id\": \"233649739709031402768325578583396384770\", \"Fee\": 0.1}, {\"Id\": \"233650937321935968388865542326490038274\", \"Fee\": 0.1}, {\"Id\": \"233652124952092057211587529250362687490\", \"Fee\": 0.1}, {\"Id\": \"233653208951811577374174946990752858114\", \"Fee\": 0.1}, {\"Id\": \"233654102803941063307441489279567593474\", \"Fee\": 0.1}, {\"Id\": \"234448198754005283335520559487624740866\", \"Fee\": 0.1}, {\"Id\": \"234449165812956932447788667014174801922\", \"Fee\": 0.1}, {\"Id\": \"234450026389258162387215855497656729602\", \"Fee\": 0.1}, {\"Id\": \"234450828019806481711805702314000449538\", \"Fee\": 0.1}, {\"Id\": \"234451748492598572436894099040956907522\", \"Fee\": 0.1}, {\"Id\": \"235248715829728634431629186890246193154\", \"Fee\": 0.1}, {\"Id\": \"235249763384493398034522393593122979842\", \"Fee\": 0.1}, {\"Id\": \"235250954342232312456011885698532573186\", \"Fee\": 0.1}, {\"Id\": \"235252009027531702344861707241130098690\", \"Fee\": 0.1}, {\"Id\": \"235252830465120650236961341725524164610\", \"Fee\": 0.1}, {\"Id\": \"236051738892232311710005913182935252994\", \"Fee\": 0.1}, {\"Id\": \"236052580770687188283200581652538523650\", \"Fee\": 0.1}, {\"Id\": \"236053469710670598329447246534313836546\", \"Fee\": 0.1}, {\"Id\": \"236054276570277643599238813663831851010\", \"Fee\": 0.1}, {\"Id\": \"236055065207407310586611719887364620290\", \"Fee\": 0.1}, {\"Id\": \"236848866111794327493390679362788982786\", \"Fee\": 0.1}, {\"Id\": \"236849730174134708058814478247422656514\", \"Fee\": 0.1}, {\"Id\": \"236850540202868253899844955963642675202\", \"Fee\": 0.1}, {\"Id\": \"236851366711059602705251476327640399874\", \"Fee\": 0.1}, {\"Id\": \"236852160260335345574024330573207633922\", \"Fee\": 0.1}, {\"Id\": \"237647777391119839479920441940344111106\", \"Fee\": 0.1}, {\"Id\": \"237648728129070010650514931463270498306\", \"Fee\": 0.1}, {\"Id\": \"237649730206869491068947128376460640258\", \"Fee\": 0.1}, {\"Id\": \"237650526291446434396981431958542286850\", \"Fee\": 0.1}, {\"Id\": \"237651517118846837785631077614857814018\", \"Fee\": 0.1}, {\"Id\": \"238446625287915340054819125996060475394\", \"Fee\": 0.1}, {\"Id\": \"238447499491460522447845518233086001154\", \"Fee\": 0.1}, {\"Id\": \"238448354521790376390482413351729168386\", \"Fee\": 0.1}, {\"Id\": \"238449180554612750108969279714808102914\", \"Fee\": 0.1}, {\"Id\": \"238450115446930418427799069487696773122\", \"Fee\": 0.1}, {\"Id\": \"239245905453565518455915291454922096642\", \"Fee\": 0.1}, {\"Id\": \"239246746222826119832662521395731824642\", \"Fee\": 0.1}, {\"Id\": \"239247563857463267038942421983639437314\", \"Fee\": 0.1}, {\"Id\": \"239248362318885085794135048985898975234\", \"Fee\": 0.1}, {\"Id\": \"239249145568499701813100251518768054274\", \"Fee\": 0.1}, {\"Id\": \"240043349427321266271174915695869755394\", \"Fee\": 0.1}, {\"Id\": \"240044240427236901687488495151465168898\", \"Fee\": 0.1}, {\"Id\": \"240045037779464445244795065018963001346\", \"Fee\": 0.1}, {\"Id\": \"240045828159613687544854120693899526146\", \"Fee\": 0.1}, {\"Id\": \"240046680337729690971993560083894173698\", \"Fee\": 0.1}]"
+						}
+					]
+				}
+			],
+			"description": "Complementary calls that translates a canonical format (YAML) into a JSON, which is more convinient for e.g., JavaScript.\n_WARNING: Please keep in mind, that translations typically changes the data in a way, that they are not useful for mining purposes. If you work on a miner, please use YAML variants._",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "70978509-4f75-4357-9a73-a2b0b9fb3af0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e9ef5391-40db-459f-b726-38fec2a06bf3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Set parameters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Difficulty\": 20\n}\n"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/params",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"{{BLOCKCHAIN}}",
+								"params"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Set parameters",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"Difficulty\": 25\n}\n"
+								},
+								"url": {
+									"raw": "{{SERVER_URL}}/api/{{BLOCKCHAIN}}/params",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"api",
+										"{{BLOCKCHAIN}}",
+										"params"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "16",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 23 Sep 2018 22:05:40 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Python/3.7 aiohttp/3.3.2 asab/18.5b4",
+									"name": "Server",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"body": "{\"result\": \"OK\"}"
+						}
+					]
+				}
+			],
+			"description": "These functions are reserved for CoinGame server admin.\nThey are protected by authorization.\nThe CoinGame uses Bearer (token based) authorization.\n\n_WARNING: Please don't cheat, this is not game about hacking ... and all requests are logged._",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2e2ec933-ed76-428a-b3b1-c710676a9775",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b6870432-a43b-4936-9ae7-a7729c026382",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
