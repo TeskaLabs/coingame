@@ -45,7 +45,7 @@ class AsabCoinApplication(asab.Application):
 
 		# Initialize the blockchain(s)
 		self.Blockchains = {
-			'coingame': Blockchain(self, './gamecoin.yaml', difficulty=20)
+			'coingame': Blockchain(self, './gamecoin.yaml', difficulty=22)
 		}
 
 		self.PubSub.subscribe("Application.tick/60!", self.new_admin_token)
