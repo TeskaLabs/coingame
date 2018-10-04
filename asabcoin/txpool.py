@@ -16,6 +16,7 @@ class TransactionPool(object):
 	def __init__(self, app):
 		self.Transactions = {}
 		self.Broker = app.Broker
+		self.WebSocketFactory = app.WebSocketFactory
 		self.Loop = app.Loop
 
 		app.PubSub.subscribe("Application.tick!", self.on_tick)
@@ -54,6 +55,12 @@ class TransactionPool(object):
 			),
 			loop = self.Loop,
 		)
+		asyncio.ensure_future(
+			self.WebSocketFactory.publish(
+				self.Loop, "transaction.removed", msg
+			),
+			loop = self.Loop,
+		)
 
 		return transaction
 
@@ -74,6 +81,13 @@ class TransactionPool(object):
 				msg,
 				target="transaction.added",
 				content_type="text/yaml",
+			),
+			loop = self.Loop,
+		)
+
+		asyncio.ensure_future(
+			self.WebSocketFactory.publish(
+				self.Loop, "transaction.added", msg
 			),
 			loop = self.Loop,
 		)

@@ -6,6 +6,7 @@ import asab
 import asab.web.rest
 
 from .blockchain import Blockchain
+from .websocket import WebSocketFactory
 
 class AsabCoinApplication(asab.Application):
 
@@ -33,6 +34,10 @@ class AsabCoinApplication(asab.Application):
 		websvc.WebApp.router.add_get(r'/api/{blockchain}/state', self.state)
 		websvc.WebApp.router.add_put(r'/api/{blockchain}/params', self.set_params)
 		websvc.WebApp.router.add_get(r'/api/{blockchain}/txpool', self.txpool)
+
+		# Add a websocket handler
+		self.WebSocketFactory = WebSocketFactory(self)
+		websvc.WebApp.router.add_get('/api/{blockchain}/ws', self.WebSocketFactory)
 
 		asab.web.StaticDirProvider(websvc.WebApp, '/', os.environ.get('WEBAPPDIR', './webui'))
 
